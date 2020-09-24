@@ -1,3 +1,11 @@
+/*
+Title: nodebucket
+Author: Professor Krasso
+Date: 9/24/2020
+Modified By: Brendan Mulhern
+Description: This is nodebucket; a task manager application.
+*/
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule} from '@angular/router';
@@ -14,13 +22,19 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { MatCardModule } from '@angular/material/card'
+import { CookieService } from 'ngx-cookie-service';
+import { LoggedInComponent } from './logged-in/logged-in.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     BaseLayoutComponent,
     AuthLayoutComponent,
-    HomeComponent
+    HomeComponent,
+    SignInComponent,
+    LoggedInComponent
   ],
   imports: [
     BrowserModule,
@@ -33,8 +47,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [ CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

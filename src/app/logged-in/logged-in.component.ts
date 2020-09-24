@@ -9,11 +9,11 @@ Description: This is nodebucket; a task manager application.
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-auth-layout',
-  templateUrl: './auth-layout.component.html',
-  styleUrls: ['./auth-layout.component.css']
+  selector: 'app-logged-in',
+  templateUrl: './logged-in.component.html',
+  styleUrls: ['./logged-in.component.css']
 })
-export class AuthLayoutComponent implements OnInit {
+export class LoggedInComponent implements OnInit {
 
   constructor() { }
 

@@ -1,0 +1,13 @@
+<form [formGroup]="form" (ngSubmit)="login()">
+<mat-card>
+    <mat-card-title>
+        <h1>Sign In</h1>
+    </mat-card-title>
+    <mat-card-content>
+        <input type='text' placeholder="Employee Id" formControlName="empId" />
+    </mat-card-content>
+    <mat-card-actions>
+        <button type="submit">Sign In</button>
+    </mat-card-actions>
+</mat-card>
+</form>
