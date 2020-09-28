@@ -21,21 +21,28 @@ export class SignInComponent implements OnInit {
   form: FormGroup;
   constructor(private cookieService: CookieService, private router: Router, private http: HttpClient, private fb: FormBuilder) { }
   ngOnInit() { 
+  // Form Initalization
     this.form = this.fb.group({
       empId: new FormControl()
     })
   }
+  // Login Function
   login() { 
+  // Get EmployeeID input
     let empId = this.form.get('empId').value;
     console.log(empId)
+  // Validating the input to the database EmployeeIDs
     this.http.get('/api/employees/' + empId).subscribe(res => {
       if (res) {
+  // Sets the cookie service variable and navigates to the home path
         this.cookieService.set('user_session', 'true')
         this.router.navigate(['home'])
       } else {
+  // Navigates back to the sign in page
         this.router.navigate([''])
       }
     })
+  // Resets the form
     this.form.reset();
   }
 }
