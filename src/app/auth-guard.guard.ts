@@ -18,10 +18,13 @@ import { Router, CanActivate } from '@angular/router'
 export class AuthGuardGuard implements CanActivate  {
   constructor(private router: Router, private cookieService: CookieService) { }
   CanActivate() { 
+    // Checks to see if user_sesions exists
     let session = this.cookieService.get('user_session')
     if (session) {
+      // Navigates to home
       this.router.navigate(['home'])
     } else {
+      // Navigates back to sign in component
       this.router.navigate([''])
     }
   }
