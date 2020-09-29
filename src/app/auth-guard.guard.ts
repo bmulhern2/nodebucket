@@ -15,7 +15,7 @@ import { Router, CanActivate } from '@angular/router'
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardGuard implements CanActivate  {
+export class AuthGuardGuard /* implements CanActivate */ {
   constructor(private router: Router, private cookieService: CookieService) { }
   CanActivate() { 
     // Checks to see if user_sesions exists
