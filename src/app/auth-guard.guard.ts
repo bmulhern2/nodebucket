@@ -15,17 +15,17 @@ import { Router, CanActivate } from '@angular/router'
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardGuard /* implements CanActivate */ {
+export class AuthGuardGuard implements CanActivate {
   constructor(private router: Router, private cookieService: CookieService) { }
-  CanActivate() { 
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) { 
     // Checks to see if user_sesions exists
     let session = this.cookieService.get('user_session')
     if (session) {
-      // Navigates to home
-      this.router.navigate(['home'])
+      return true
     } else {
       // Navigates back to sign in component
       this.router.navigate([''])
+      return false
     }
   }
 }

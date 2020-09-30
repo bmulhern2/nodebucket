@@ -7,7 +7,7 @@ Description: This is nodebucket; a task manager application.
 */
 
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder} from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { CookieService } from 'ngx-cookie-service'
@@ -23,7 +23,8 @@ export class SignInComponent implements OnInit {
   ngOnInit() { 
   // Form Initalization
     this.form = this.fb.group({
-      empId: new FormControl()
+  // EmployeeID initalization with validators
+      empId: [null, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])]
     })
   }
   // Login Function
