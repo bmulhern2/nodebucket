@@ -29,7 +29,7 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../dist/nodebucket')));
 app.use('/', express.static(path.join(__dirname, '../dist/nodebucket')));
 // Uses the employee router
-app.use(employeeRoutes)
+app.use('/api/employees', employeeRoutes)
 /**
  * Variables
  */
