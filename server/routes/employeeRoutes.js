@@ -11,7 +11,7 @@ let employee = require('../models/employee')
 
 let router = express.Router()
 // This routes validates the input employeeID and the Datbase EmployeeIDs
-router.get('/employee/:empId', function(req, res) {
+router.get('/:empId/tasks', function(req, res) {
 try {
     employee.findOne({ "empId": req.params.empId }, function(err, data) {
         if (err) console.log(err)
@@ -45,7 +45,7 @@ try {
 }
 })
 // New Task Route
-router.post('/:empID/tasks/', async(req, res) => {
+router.post('/:empId/tasks', async(req, res) => {
     try {
         employee.findOne({ "empId": req.params.empId }, function(err, employee) {
             if (err) {
@@ -59,9 +59,7 @@ router.post('/:empID/tasks/', async(req, res) => {
                 const task = {
                     text: req.body.text
                 }
-
                 employee.todo.push(task)
-
                 employee.save(function(err, updatedEmployee) {
                     if (err) {
                         console.log(err)
@@ -85,9 +83,9 @@ router.post('/:empID/tasks/', async(req, res) => {
     }
 })
 // Update Task Route
-router.put('/:empId/tasks', async(req, res) => {
+router.put('/:empId/tasks/:taskId', async(req, res) => {
    try {
-    employee.findOne({ "empId": res.params.empId }, function(err, employee) {
+    employee.findOne({ "empId": req.params.empId }, function(err, employee) {
         if (err) {
             console.log(err)
             res.status(500).send({
@@ -95,7 +93,39 @@ router.put('/:empId/tasks', async(req, res) => {
             })
         } else {
             console.log(employee)
-            employee.set({
+            let todoItem = employee.todo.find(item => item._id.toString() === req.params.taskId)
+            let doneItem = employee.done.find(item => item._id.toString() === req.params.taskId)
+            if (todoItem) {
+                updatedTodo = {
+                    text: req.body.text
+                }
+                employee.set({
+                    todo: updatedTodo,
+                    done: employee.done
+                })
+                employee.save(function(err, updatedEmployee) {
+                    if (err) console.log(err)
+                    else res.json(updatedEmployee)
+                })
+            } else if (doneItem) {
+                updatedTask = {
+                    text: req.body.text
+                }
+                employee.set({
+                    todo: employee.todo,
+                    done: updatedTask
+                })
+                employee.save(function(err, updatedEmployee) {
+                    if (err) console.log(err)
+                    else res.json(updatedEmployee)
+                })
+            } else {
+                console.log("Invalid Task Id")
+                res.status(200).send({
+                    "message": "unable to find task id"
+                })
+            }
+           /* employee.set({
                 todo: req.body.todo,
                 done: req.body.done
             })
@@ -110,6 +140,7 @@ router.put('/:empId/tasks', async(req, res) => {
                     res.json(updatedEmployee)
                 }
             })
+            */
         }
     })
 } catch (e) {
@@ -120,9 +151,9 @@ router.put('/:empId/tasks', async(req, res) => {
     }
 })
 // Delete Task Route
-router.delete('/:empId/tasks/:tasksId', async(req, res) => {
-    try {
-        employee.findOne({ 'empId': req.params.empId }, function(err, employee) {
+router.delete('/:empId/tasks/:taskId', async(req, res) => {
+    try { 
+        employee.findOne({ "empId": req.params.empId }, function(err, employee) {
             if (err) {
                 console.log(err)
                 res.status(500).send({
@@ -130,8 +161,8 @@ router.delete('/:empId/tasks/:tasksId', async(req, res) => {
                 })
             } else {
                 console.log(employee)
-                const todoItem = employee.todo.find(item => item._id.tostring() === req.params.taskId)
-                const doneItem = employee.done.find(item => item._id.toString() === req.params.taskId) 
+                const todoItem = employee.todo.find(item => item._id.toString() === req.params.taskId )
+                const doneItem = employee.done.find(item => item._id.toString() === req.params.taskId )
                 if (todoItem) {
                     employee.todo.id(todoItem._id).remove()
                     employee.save(function(err, updatedtodoItemEmployee) {
