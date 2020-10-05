@@ -33,7 +33,7 @@ export class SignInComponent implements OnInit {
     let empId = this.form.get('empId').value;
     console.log(empId)
   // Validating the input to the database EmployeeIDs
-    this.http.get('/api/employees/employee' + empId).subscribe(res => {
+    this.http.get('http://localhost:3000/api/employees/' + empId + '/tasks').subscribe(res => {
       if (res) {
   // Sets the cookie service variable and navigates to the home path
         this.cookieService.set('user_session', 'true')

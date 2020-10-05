@@ -7,9 +7,16 @@ Description: This is nodebucket; a task manager application.
 */
 
 let express = require('express')
+let cors = require('cors')
+let bodyParser = require('body-parser')
 let employee = require('../models/employee')
 
 let router = express.Router()
+// Router middleware
+router.use(cors())
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({'extended': true}));
+
 // This routes validates the input employeeID and the Datbase EmployeeIDs
 router.get('/:empId/tasks', function(req, res) {
 try {
