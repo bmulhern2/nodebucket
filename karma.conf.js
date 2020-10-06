@@ -17,7 +17,7 @@ module.exports = function (config) {
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, './coverage/nodebucket'),
-      reports: ['html', 'lcovonly', 'text-summary'],
+      reports: ['text-summary'],
       fixWebpackSourcePaths: true
     },
     reporters: ['progress', 'kjhtml'],

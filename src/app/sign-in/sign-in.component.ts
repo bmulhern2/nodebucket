@@ -28,13 +28,14 @@ export class SignInComponent implements OnInit {
     })
   }
   // Login Function
-  login() { 
+  login(empId: number) { 
+    let res;
   // Get EmployeeID input
-    let empId = this.form.get('empId').value;
+    empId = this.form.get('empId').value;
     console.log(empId)
   // Validating the input to the database EmployeeIDs
     this.http.get('http://localhost:3000/api/employees/' + empId + '/tasks').subscribe(res => {
-      if (res) {
+    if (res) {
   // Sets the cookie service variable and navigates to the home path
         this.cookieService.set('user_session', 'true')
         this.router.navigate(['home'])
@@ -45,5 +46,6 @@ export class SignInComponent implements OnInit {
     })
   // Resets the form
     this.form.reset();
+    return res;
   }
 }
