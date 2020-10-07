@@ -34,8 +34,12 @@ export const AppRoutes: Routes = [
         component: AboutUsComponent
       },
       {
-        path: 'not-found',
+        path: '404',
         component: NotFoundComponent
+      },
+      {
+        path: '**',
+        redirectTo: '404'
       }
     ]
   }

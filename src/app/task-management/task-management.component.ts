@@ -1,3 +1,12 @@
+/*
+Title: nodebucket
+Author: Professor Krasso
+Date: 10/7/2020
+Modified By: Brendan Mulhern
+Reference: https://material.angular.io/cdk/drag-drop/overview
+Description: This is nodebucket; a task manager application.
+*/
+
 import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop'
 
