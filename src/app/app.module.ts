@@ -27,7 +27,9 @@ import { MatCardModule } from '@angular/material/card'
 import { CookieService } from 'ngx-cookie-service';
 import { LoggedInComponent } from './logged-in/logged-in.component';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { NotFoundComponent } from './not-found/not-found.component'
+import { NotFoundComponent } from './not-found/not-found.component';
+import { TaskManagementComponent } from './task-management/task-management.component'
+import { DragDropModule } from '@angular/cdk/drag-drop'
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { NotFoundComponent } from './not-found/not-found.component'
     SignInComponent,
     LoggedInComponent,
     AboutUsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TaskManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { NotFoundComponent } from './not-found/not-found.component'
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    DragDropModule
   ],
   providers: [ CookieService ],
   bootstrap: [AppComponent]

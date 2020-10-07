@@ -12,6 +12,8 @@ Description: This is nodebucket; a task manager application.
 import { LoggedInComponent } from './logged-in/logged-in.component'
 import { AuthGuardGuard } from './auth-guard.guard';
 import { NotFoundComponent } from './not-found/not-found.component'
+import { AboutUsComponent } from './about-us/about-us.component';
+import { TaskManagementComponent } from './task-management/task-management.component';
 
 export const AppRoutes: Routes = [
   {
@@ -25,7 +27,11 @@ export const AppRoutes: Routes = [
       },
       {
         path: 'home',
-        component: LoggedInComponent
+        component: TaskManagementComponent
+      },
+      {
+        path: 'about',
+        component: AboutUsComponent
       },
       {
         path: 'not-found',

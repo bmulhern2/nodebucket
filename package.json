@@ -2,14 +2,9 @@
   "name": "nodebucket",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "server": "nodemon ./server/app.js",
-    "localhost": "ng build --prod --output-path dist --base-href / && nodemon ./server/app.js",
-    "start": "node server/app.js",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+   "start": "npm client && npm server",
+   "client": "ng serve",
+   "server": "nodemon ./server/app.js"
   },
   "private": true,
   "dependencies": {
