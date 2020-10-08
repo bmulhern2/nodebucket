@@ -39,7 +39,10 @@ export class TaskManagementComponent implements OnInit {
   }
   updateTask(todo, done, taskId) {
     let empId = this.cookieService.get('user_session')
-    this.http.put('http://localhost:3000/api/employees/' + empId + '/tasks/' + taskId)
+    this.http.put('http://localhost:3000/api/employees/' + empId + '/tasks/' + taskId, {
+      todo,
+      done
+    })
   }
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
