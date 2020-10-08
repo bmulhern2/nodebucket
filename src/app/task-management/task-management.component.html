@@ -1,9 +1,6 @@
-<div fxLayout="row">
 <app-create-task></app-create-task>
-</div>
-<div fxLayout="row">
-<div fxFlex="50" id="todo">
-<div class="example-container">
+<div fxFlex="50">
+</div><div class="example-container">
     <h2>To Do</h2>
     <div 
         cdkDropList
@@ -14,20 +11,20 @@
         (cdkDropListDropped)="drop($event)">
     <div class="example-box" *ngFor="let item of todo" cdkDrag>
         {{ item.text }}
-        </div>
         <div fxFlex fxLayoutAlign="end">
             <button [matMenuTriggerFor]="todoOptions" class="task-options-menu" mat-icon-button>
                 <mat-icon>more_horiz</mat-icon>
             </button>
             <mat-menu #todoOptions="matMenu" x-position="before">
-                <button (click)="deleteTask(item._id)" mat-menu-item>
+                <button (click)="deleteTask(item)" mat-menu-item>
                     Remove
                 </button>
             </mat-menu>
         </div>
+        </div>
     </div>
 </div>
-<div fxFlex="50" id="done">
+<div fxFlex="50">
     <div class="example-container">
         <h2>Done</h2>
         <div 
@@ -51,5 +48,4 @@
             </mat-menu>
         </div>
     </div>
-</div>
 </div>

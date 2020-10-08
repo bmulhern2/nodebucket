@@ -29,6 +29,14 @@ export class TaskManagementComponent implements OnInit {
       this.done = data['done']
     })
   }
+  deleteTask(item: any) {
+    
+    let empId = this.cookieService.get('user_session')
+    return this.http.delete('http://localhost:3000/api/employees/' + empId + '/tasks/' + item._id).subscribe(err => {
+      if (err) console.log(err)
+      else console.log("Delete Success")
+    })
+  }
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
