@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop'
 import { CookieService } from 'ngx-cookie-service'
 import { HttpClient } from '@angular/common/http'
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-task-management',
@@ -30,21 +31,28 @@ export class TaskManagementComponent implements OnInit {
     })
   }
   deleteTask(item: any) {
-    
     let empId = this.cookieService.get('user_session')
     return this.http.delete('http://localhost:3000/api/employees/' + empId + '/tasks/' + item._id).subscribe(err => {
       if (err) console.log(err)
       else console.log("Delete Success")
     })
   }
+  updateTask(todo, done, taskId) {
+    let empId = this.cookieService.get('user_session')
+    this.http.put('http://localhost:3000/api/employees/' + empId + '/tasks/' + taskId)
+  }
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      let taskId = this.todo.id
+      this.updateTask(this.todo, this.done, taskId)
     } else {
       transferArrayItem(event.previousContainer.data, 
                          event.container.data,
                          event.previousIndex,
                          event.currentIndex);
+      let taskId = this.todo.id
+      this.updateTask(this.todo, this.done, taskId)
     }
   }
 }
