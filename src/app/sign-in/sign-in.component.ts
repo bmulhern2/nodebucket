@@ -28,16 +28,16 @@ export class SignInComponent implements OnInit {
     })
   }
   // Login Function
-  login(empId: number) { 
+  login(empId: any) { 
     let res;
   // Get EmployeeID input
     empId = this.form.get('empId').value;
     console.log(empId)
   // Validating the input to the database EmployeeIDs
-    this.http.get('http://localhost:3000/api/employees/' + empId + '/tasks').subscribe(res => {
+    this.http.get('http://localhost:3000/api/employees/' + empId).subscribe(res => {
     if (res) {
   // Sets the cookie service variable and navigates to the home path
-        this.cookieService.set('user_session', 'true')
+        this.cookieService.set('user_session', empId, 1)
         this.router.navigate(['home'])
       } else {
   // Navigates back to the sign in page

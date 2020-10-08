@@ -25,11 +25,14 @@ import {MatIconModule} from '@angular/material/icon';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { MatCardModule } from '@angular/material/card'
 import { CookieService } from 'ngx-cookie-service';
-import { LoggedInComponent } from './logged-in/logged-in.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TaskManagementComponent } from './task-management/task-management.component'
 import { DragDropModule } from '@angular/cdk/drag-drop'
+import { MatMenuModule } from '@angular/material/menu';
+import { CreateTaskComponent } from './create-task/create-task.component'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatFormFieldModule } from '@angular/material/form-field'
 
 @NgModule({
   declarations: [
@@ -38,10 +41,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
     AuthLayoutComponent,
     HomeComponent,
     SignInComponent,
-    LoggedInComponent,
     AboutUsComponent,
     NotFoundComponent,
-    TaskManagementComponent
+    TaskManagementComponent,
+    CreateTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -53,9 +56,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
     FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
+    MatFormFieldModule,
     MatIconModule,
     MatCardModule,
-    DragDropModule
+    DragDropModule,
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [ CookieService ],
   bootstrap: [AppComponent]

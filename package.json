@@ -2,9 +2,7 @@
   "name": "nodebucket",
   "version": "0.0.0",
   "scripts": {
-   "start": "npm client && npm server",
-   "client": "ng serve",
-   "server": "nodemon ./server/app.js"
+    "start": "concurrently \"ng serve\" \"nodemon ./server/app.js\""
   },
   "private": true,
   "dependencies": {

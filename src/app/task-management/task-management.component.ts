@@ -7,29 +7,28 @@ Reference: https://material.angular.io/cdk/drag-drop/overview
 Description: This is nodebucket; a task manager application.
 */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop'
+import { CookieService } from 'ngx-cookie-service'
+import { HttpClient } from '@angular/common/http'
 
 @Component({
   selector: 'app-task-management',
   templateUrl: './task-management.component.html',
   styleUrls: ['./task-management.component.css']
 })
-export class TaskManagementComponent {
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
-
+export class TaskManagementComponent implements OnInit {
+  todo: any
+  done: any
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  ngOnInit() { 
+    let empId = this.cookieService.get('user_session')
+    console.log(empId)
+    this.http.get('http://localhost:3000/api/employees/' + empId + '/tasks').subscribe(data => {
+      this.todo = data['todo']
+      this.done = data['done']
+    })
+  }
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

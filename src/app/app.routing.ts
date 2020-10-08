@@ -10,7 +10,6 @@ Description: This is nodebucket; a task manager application.
 import {Routes} from '@angular/router';
 import {BaseLayoutComponent} from './shared/base-layout/base-layout.component';
 import {HomeComponent} from './pages/home/home.component';
-import { LoggedInComponent } from './logged-in/logged-in.component'
 import { AuthGuardGuard } from './auth-guard.guard';
 import { NotFoundComponent } from './not-found/not-found.component'
 import { AboutUsComponent } from './about-us/about-us.component';

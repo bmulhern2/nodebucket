@@ -18,7 +18,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({'extended': true}));
 
 // This routes validates the input employeeID and the Datbase EmployeeIDs
-router.get('/:empId/tasks', function(req, res) {
+router.get('/:empId', function(req, res) {
 try {
     employee.findOne({ "empId": req.params.empId }, function(err, data) {
         if (err) console.log(err)
