@@ -37,25 +37,24 @@ export class TaskManagementComponent implements OnInit {
       else console.log("Delete Success")
     })
   }
-  updateTask(todo, done, taskId) {
+  updateTask(todo, done) {
     let empId = this.cookieService.get('user_session')
-    this.http.put('http://localhost:3000/api/employees/' + empId + '/tasks/' + taskId, {
+    /* this.http.put('http://localhost:3000/api/employees/' + empId + '/tasks/', {
       todo,
       done
-    })
+    }) */
   }
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      let taskId = this.todo.id
-      this.updateTask(this.todo, this.done, taskId)
+      /* console.log(event)
+      this.updateTask(this.todo, this.done) */
     } else {
       transferArrayItem(event.previousContainer.data, 
                          event.container.data,
                          event.previousIndex,
                          event.currentIndex);
-      let taskId = this.todo.id
-      this.updateTask(this.todo, this.done, taskId)
+      // this.updateTask(this.todo, this.done)
     }
   }
 }

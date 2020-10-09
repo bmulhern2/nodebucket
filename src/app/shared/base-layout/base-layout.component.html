@@ -6,12 +6,12 @@
       <!-- navbar container -->
       <div class="navbar-container">
         <!-- logo -->
-        <button class="logo" routerLink="/" mat-button>nodebucket</button>
-
-        <button class="navbar-link" routerLink="/" mat-button>Home</button>
-        <button class="navbar-link" routerLink="/about" mat-button>About</button>
+        <button class="logo" mat-button style="font-size: 20px; color: purple; background: white;" [matMenuTriggerFor]="menu">nodebucket</button>
+        <mat-menu #menu="matMenu">
+        <button id="link2" class="navbar-link" routerLink="/" mat-button>Home</button>
+        <button id="link1" class="navbar-link" routerLink="/about" mat-button>About</button>
+        </mat-menu>
       </div>
-
     </mat-toolbar>
   </nav>
 
@@ -23,7 +23,7 @@
   </div>
 
   <!-- footer -->
-  <div fxFlex>
+<div fxFlex style="margin-top: 15%;">
     <footer class="footer">
       <mat-toolbar class="footer-content">
         <p>
