@@ -18,8 +18,13 @@ describe('TaskManagementComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should show todo array', () => {
+    expect(component.todo).toBeTruthy()
+  })
+  it('should show done array', () => {
+    expect(component.done).toBeTruthy()
+  })
+  it('should show delete function', () => {
+    expect(component.deleteTask).toBeTruthy()
+  })
 });

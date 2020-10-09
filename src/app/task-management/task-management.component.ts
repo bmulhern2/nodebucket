@@ -11,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop'
 import { CookieService } from 'ngx-cookie-service'
 import { HttpClient } from '@angular/common/http'
-import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-task-management',
