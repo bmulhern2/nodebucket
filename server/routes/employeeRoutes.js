@@ -90,7 +90,7 @@ router.post('/:empId/tasks', async(req, res) => {
     }
 })
 // Update Task Route
-router.put('/:empId/tasks/:taskId', async(req, res) => {
+router.put('/:empId/tasks', async(req, res) => {
    try {
     employee.findOne({ "empId": req.params.empId }, function(err, employee) {
         if (err) {
@@ -99,7 +99,7 @@ router.put('/:empId/tasks/:taskId', async(req, res) => {
                 "message": "internal server error"
             })
         } else {
-            console.log(employee)
+            /* console.log(employee)
             let todoItem = employee.todo.find(item => item._id.toString() === req.params.taskId)
             let doneItem = employee.done.find(item => item._id.toString() === req.params.taskId)
             if (todoItem) {
@@ -131,8 +131,8 @@ router.put('/:empId/tasks/:taskId', async(req, res) => {
                 res.status(200).send({
                     "message": "unable to find task id"
                 })
-            }
-           /* employee.set({
+            } */
+           employee.set({
                 todo: req.body.todo,
                 done: req.body.done
             })
@@ -147,7 +147,6 @@ router.put('/:empId/tasks/:taskId', async(req, res) => {
                     res.json(updatedEmployee)
                 }
             })
-            */
         }
     })
 } catch (e) {

@@ -62,13 +62,9 @@ import { MatFormFieldModule } from '@angular/material/form-field'
     MatCardModule,
     DragDropModule,
     MatMenuModule,
-    MatDialogModule,
-    CreateTaskComponent
+    MatDialogModule
   ],
   providers: [ CookieService ],
-  bootstrap: [AppComponent],
-  exports: [
-    RouterModule
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
