@@ -13,7 +13,7 @@
         class="example-list"
         (cdkDropListDropped)="drop($event)">
     <div class="example-box" *ngFor="let item of todo" cdkDrag>
-        {{ item.text }}
+        {{ item.text | async }}
         <div fxFlex fxLayoutAlign="end">
             <button [matMenuTriggerFor]="todoOptions" class="task-options-menu" mat-icon-button>
                 <mat-icon>more_horiz</mat-icon>
@@ -38,7 +38,7 @@
             class="example-list"
             (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let item of done" cdkDrag>
-            {{ item.text }}
+            {{ item.text | async }}
         <div fxFlex fxLayoutAlign="end">
             <button [matMenuTriggerFor]="doneOptions" class="task-options-menu" mat-icon-button>
                 <mat-icon>more_horiz</mat-icon>
