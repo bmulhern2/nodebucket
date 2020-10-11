@@ -18,11 +18,11 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({'extended': true}));
 
 // This routes validates the input employeeID and the Datbase EmployeeIDs
-router.get('/:empId', function(req, res) {
+router.get('/:empId', async function(req, res) {
 try {
-    employee.findOne({ "empId": req.params.empId }, function(err, data) {
+    employee.findOne({ "empId": req.params.empId }, async function(err, data) {
         if (err) console.log(err)
-        else res.json(data)
+        else await res.json(data)
     })
 } catch (error) {
     console.log(error)
@@ -31,9 +31,9 @@ try {
 
 // Employee Read Task Route
 
-router.get('/:empId/tasks', function(req, res) {
+router.get('/:empId/tasks', async function(req, res) {
 try {
-    employee.findOne({ "empId": req.params.empId }, function(err, employee) {
+    employee.findOne({ "empId": req.params.empId }, async function(err, employee) {
         if (err) {
             console.log(err)
             res.status(500).send({
@@ -41,7 +41,7 @@ try {
             })
         } else {
             console.log(employee)
-            res.json(employee)
+            await res.json(employee)
         }
     })
 } catch (e) {
@@ -54,7 +54,7 @@ try {
 // New Task Route
 router.post('/:empId/tasks', async(req, res) => {
     try {
-        employee.findOne({ "empId": req.params.empId }, function(err, employee) {
+        employee.findOne({ "empId": req.params.empId }, async function(err, employee) {
             if (err) {
                 console.log(err)
                 res.status(500).send({
@@ -67,7 +67,7 @@ router.post('/:empId/tasks', async(req, res) => {
                     text: req.body.text
                 }
                 employee.todo.push(task)
-                employee.save(function(err, updatedEmployee) {
+                employee.save(async function(err, updatedEmployee) {
                     if (err) {
                         console.log(err)
                         res.status(500).send({
@@ -76,7 +76,7 @@ router.post('/:empId/tasks', async(req, res) => {
                     } else {
                         console.log(updatedEmployee)
 
-                        res.json(updatedEmployee)
+                        await res.json(updatedEmployee)
                     }
                 })
             }
@@ -92,7 +92,7 @@ router.post('/:empId/tasks', async(req, res) => {
 // Update Task Route
 router.put('/:empId/tasks', async(req, res) => {
    try {
-    employee.findOne({ "empId": req.params.empId }, function(err, employee) {
+    employee.findOne({ "empId": req.params.empId }, async function(err, employee) {
         if (err) {
             console.log(err)
             res.status(500).send({
@@ -136,7 +136,7 @@ router.put('/:empId/tasks', async(req, res) => {
                 todo: req.body.todo,
                 done: req.body.done
             })
-            employee.save(function(err, updatedEmployee) {
+            employee.save(async function(err, updatedEmployee) {
                 if (err) {
                     console.log(err)
                     res.status(500).send({
@@ -144,7 +144,7 @@ router.put('/:empId/tasks', async(req, res) => {
                     })
                 } else {
                     console.log(updatedEmployee)
-                    res.json(updatedEmployee)
+                    await res.json(updatedEmployee)
                 }
             })
         }
@@ -159,7 +159,7 @@ router.put('/:empId/tasks', async(req, res) => {
 // Delete Task Route
 router.delete('/:empId/tasks/:taskId', async(req, res) => {
     try { 
-        employee.findOne({ "empId": req.params.empId }, function(err, employee) {
+        employee.findOne({ "empId": req.params.empId }, async function(err, employee) {
             if (err) {
                 console.log(err)
                 res.status(500).send({
@@ -171,7 +171,7 @@ router.delete('/:empId/tasks/:taskId', async(req, res) => {
                 const doneItem = employee.done.find(item => item._id.toString() === req.params.taskId )
                 if (todoItem) {
                     employee.todo.id(todoItem._id).remove()
-                    employee.save(function(err, updatedtodoItemEmployee) {
+                    employee.save(async function(err, updatedtodoItemEmployee) {
                         if (err) {
                             console.log(err)
                             res.status(500).send({
@@ -179,7 +179,7 @@ router.delete('/:empId/tasks/:taskId', async(req, res) => {
                             })
                         } else {
                             console.log(updatedtodoItemEmployee)
-                            res.json(updatedtodoItemEmployee)
+                            await res.json(updatedtodoItemEmployee)
                         }
                     })
                 } else if (doneItem) {

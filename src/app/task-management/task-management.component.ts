@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop'
 import { CookieService } from 'ngx-cookie-service'
 import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-task-management',
@@ -21,24 +22,27 @@ export class TaskManagementComponent implements OnInit {
   todo: any
   done: any
   constructor(private http: HttpClient, private cookieService: CookieService) { }
-  ngOnInit() { 
+  async ngOnInit() {
+    await this.getTasks();
+   }
+  async getTasks() {
     let empId = this.cookieService.get('user_session')
     console.log(empId)
-    this.http.get('http://localhost:3000/api/employees/' + empId + '/tasks').subscribe(data => {
+    await this.http.get<any>('http://localhost:3000/api/employees/' + empId + '/tasks').subscribe(data => {
       this.todo = data['todo']
       this.done = data['done']
     })
   }
   deleteTask(item: any) {
     let empId = this.cookieService.get('user_session')
-    return this.http.delete('http://localhost:3000/api/employees/' + empId + '/tasks/' + item._id).subscribe(err => {
+    this.http.delete('http://localhost:3000/api/employees/' + empId + '/tasks/' + item._id).subscribe(err => {
       if (err) console.log(err)
       else console.log("Delete Success")
     })
   }
   updateTask(empId, todo, done): any {
     empId = this.cookieService.get('user_session')
-    return this.http.put('http://localhost:3000/api/employees/' + empId + '/tasks', {
+    this.http.put('http://localhost:3000/api/employees/' + empId + '/tasks', {
       todo,
       done
     }).subscribe(res => {
