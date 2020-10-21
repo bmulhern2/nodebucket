@@ -1,3 +1,11 @@
+/*
+Title: nodebucket
+Author: Professor Krasso
+Date: 10/7/2020
+Modified By: Brendan Mulhern
+Description: This is nodebucket; a task manager application.
+*/
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
